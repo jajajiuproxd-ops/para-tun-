@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0049)https://jaime-chipana.github.io/mi-pagina-flores/ -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Flores para Ti - Con Amor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./index.html._files/css2" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background: radial-gradient(circle at center, #ffe6f2, #ffc9d6, #ffafc9);
+            color: #4b304b;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Estrellitas */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 4s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Emojis que caen */
+        .emoji-caer {
+            position: absolute;
+            top: -30px;
+            font-size: 25px; /* Tamaño del emoji */
+            animation: caer 10s linear infinite;
+            opacity: 0.8;
+            z-index: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes caer {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Contenedor */
+        .cards-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            flex: 1;
+            backdrop-filter: blur(5px);
+            transition: transform 0.4s, box-shadow 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-family: 'Dancing Script', cursive;
+            margin: 0 0 15px;
+            color: #d15181;
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            margin: 12px 0 6px;
+            font-size: 22px;
+            font-family: 'Dancing Script', cursive;
+            color: #ff69b4;
+        }
+
+        p {
+            margin: 0;
+            font-size: 16px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #5d455d;
+            line-height: 1.4;
+        }
+
+        /* Reproductor */
+        .player {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 40px;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin: 0 auto 20px;
+            max-width: 250px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
+        }
+        .player.playing {
+            box-shadow: 0 0 20px #ff69b4;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+        .controls button {
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #ffc2d1;
+            color: #d15181;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .controls button:hover {
+            background: #ffb3c5;
+            transform: scale(1.1);
+        }
+        .controls .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #5d455d;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .flowers img {
+            width: 200px;
+            max-width: 100%;
+            filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.5));
+            margin-bottom: 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Animación de latido para la primera flor */
+        .flower-heartbeat {
+            animation: heartbeat 1.5s infinite ease-in-out; /* Animación más lenta y suave */
+            transform-origin: center bottom; /* El latido parece venir de la base de la flor */
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); } /* Un latido más pronunciado */
+        }
+
+        /* Animación flotante para la segunda flor */
+        .flower-floating {
+            animation: flotar 4s infinite ease-in-out;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cards-container">
+        <div class="card">
+            <h1>🌸 Para Tun, con cariño</h1>
+            <div class="player">
+                <div class="controls">
+                    <button id="playBtn">▶</button>
+                    <div class="title">Una dulce melodía para ti 💖</div>
+                </div>
+                <audio id="audio" src="musica.mp3"></audio>
+            </div>
+            <div class="flowers">
+                <img src="./index.html._files/flor.png" alt="Flores para ti" class="flower-heartbeat">
+            </div>
+            <h3>De toto para tun</h3>
+            <p>La flor mas hermosa</p>
+        </div>
+        <div class="card">
+            <h1>🌻 TUN</h1>
+            <div class="flowers">
+                <img src="./index.html._files/flor2.png" alt="Flor animada" class="flower-floating">
+            </div>
+            <h3>Ella sabia que vendria</h3>
+            <p>Espero algun dia dartelas en persona</p>
+        </div>
+    </div>
+    <script>
+        const audio = document.getElementById("audio");
+        const playBtn = document.getElementById("playBtn");
+        const player = document.querySelector(".player");
+
+        playBtn.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = "⏸";
+                player.classList.add("playing");
+                alert("✨ Que esta melodía llene tu corazón de paz y alegría ✨");
+            } else {
+                audio.pause();
+                playBtn.textContent = "▶";
+                player.classList.remove("playing");
+            }
+        });
+
+        // Estrellitas
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.style.top = Math.random() * 100 + "%";
+            star.style.left = Math.random() * 100 + "%";
+            star.style.animationDuration = (2 + Math.random() * 3) + "s";
+            document.body.appendChild(star);
+        }
+
+        // Emojis
+        const yellowEmojis = ["☀️", "🌼", "🌻", "🏵️"]; // Lista de emojis amarillos/florales
+
+        function crearEmoji() {
+            const emoji = document.createElement("div");
+            emoji.classList.add("emoji-caer");
+            const randomEmoji = yellowEmojis[Math.floor(Math.random() * yellowEmojis.length)];
+            emoji.textContent = randomEmoji; // Selecciona un emoji aleatorio
+            emoji.style.left = Math.random() * window.innerWidth + "px";
+            emoji.style.animationDuration = (8 + Math.random() * 6) + "s";
+            emoji.style.animationDelay = -Math.random() * 8 + "s";
+            document.body.appendChild(emoji);
+            setTimeout(() => { emoji.remove(); }, 14000);
+        }
+        setInterval(crearEmoji, 400);
+    </script><div class="star" style="top: 33.9167%; left: 97.2976%; animation-duration: 3.50026s;"></div><div class="star" style="top: 93.6719%; left: 27.469%; animation-duration: 4.23106s;"></div><div class="star" style="top: 18.4087%; left: 92.7276%; animation-duration: 4.37862s;"></div><div class="star" style="top: 12.4023%; left: 57.8727%; animation-duration: 3.90611s;"></div><div class="star" style="top: 64.5881%; left: 50.9984%; animation-duration: 4.6488s;"></div><div class="star" style="top: 76.995%; left: 19.4787%; animation-duration: 4.47447s;"></div><div class="star" style="top: 43.1043%; left: 85.9906%; animation-duration: 3.65329s;"></div><div class="star" style="top: 23.9848%; left: 17.1208%; animation-duration: 4.01073s;"></div><div class="star" style="top: 71.5753%; left: 63.306%; animation-duration: 4.84835s;"></div><div class="star" style="top: 34.75%; left: 59.273%; animation-duration: 2.53263s;"></div><div class="star" style="top: 79.5607%; left: 93.0461%; animation-duration: 4.96825s;"></div><div class="star" style="top: 12.1055%; left: 16.6288%; animation-duration: 4.43417s;"></div><div class="star" style="top: 25.6313%; left: 97.4414%; animation-duration: 4.47426s;"></div><div class="star" style="top: 23.7274%; left: 92.4468%; animation-duration: 2.978s;"></div><div class="star" style="top: 48.575%; left: 95.1758%; animation-duration: 2.5794s;"></div><div class="star" style="top: 13.6096%; left: 86.7207%; animation-duration: 3.32767s;"></div><div class="star" style="top: 93.9419%; left: 37.5577%; animation-duration: 2.84083s;"></div><div class="star" style="top: 17.0258%; left: 96.9196%; animation-duration: 4.00778s;"></div><div class="star" style="top: 69.6068%; left: 25.8238%; animation-duration: 4.91133s;"></div><div class="star" style="top: 67.5996%; left: 59.5404%; animation-duration: 3.83914s;"></div><div class="star" style="top: 91.5952%; left: 43.4777%; animation-duration: 4.21299s;"></div><div class="star" style="top: 29.9162%; left: 21.1953%; animation-duration: 2.60727s;"></div><div class="star" style="top: 44.748%; left: 81.4364%; animation-duration: 2.87429s;"></div><div class="star" style="top: 33.0747%; left: 28.3331%; animation-duration: 3.08969s;"></div><div class="star" style="top: 75.1044%; left: 22.4758%; animation-duration: 4.03576s;"></div><div class="star" style="top: 99.6124%; left: 4.35875%; animation-duration: 2.60178s;"></div><div class="star" style="top: 27.9556%; left: 46.2175%; animation-duration: 4.69329s;"></div><div class="star" style="top: 43.7531%; left: 40.3972%; animation-duration: 3.58924s;"></div><div class="star" style="top: 87.8929%; left: 56.6102%; animation-duration: 4.2323s;"></div><div class="star" style="top: 43.4236%; left: 20.3151%; animation-duration: 3.73931s;"></div><div class="star" style="top: 79.593%; left: 43.9505%; animation-duration: 3.16899s;"></div><div class="star" style="top: 95.8151%; left: 69.0556%; animation-duration: 2.29869s;"></div><div class="star" style="top: 55.2902%; left: 47.6301%; animation-duration: 2.33883s;"></div><div class="star" style="top: 1.42984%; left: 12.8706%; animation-duration: 3.72336s;"></div><div class="star" style="top: 50.7861%; left: 45.2021%; animation-duration: 4.03016s;"></div><div class="star" style="top: 43.074%; left: 13.6576%; animation-duration: 2.17377s;"></div><div class="star" style="top: 17.8533%; left: 85.1521%; animation-duration: 3.66087s;"></div><div class="star" style="top: 94.5619%; left: 93.753%; animation-duration: 3.13242s;"></div><div class="star" style="top: 23.006%; left: 72.9165%; animation-duration: 4.04252s;"></div><div class="star" style="top: 57.8507%; left: 21.6714%; animation-duration: 3.9261s;"></div><div class="star" style="top: 23.9318%; left: 4.99565%; animation-duration: 3.37282s;"></div><div class="star" style="top: 52.2763%; left: 45.3341%; animation-duration: 2.01296s;"></div><div class="star" style="top: 42.3132%; left: 33.2427%; animation-duration: 4.94667s;"></div><div class="star" style="top: 44.3743%; left: 76.7742%; animation-duration: 4.43907s;"></div><div class="star" style="top: 97.6531%; left: 67.8715%; animation-duration: 4.25361s;"></div><div class="star" style="top: 14.6335%; left: 12.4528%; animation-duration: 3.43688s;"></div><div class="star" style="top: 74.0957%; left: 75.7492%; animation-duration: 4.72817s;"></div><div class="star" style="top: 22.764%; left: 73.9671%; animation-duration: 3.20527s;"></div><div class="star" style="top: 9.81617%; left: 18.5084%; animation-duration: 2.87708s;"></div><div class="star" style="top: 84.9126%; left: 51.6445%; animation-duration: 4.37512s;"></div><div class="star" style="top: 11.4904%; left: 15.4919%; animation-duration: 2.88322s;"></div><div class="star" style="top: 35.8039%; left: 30.0645%; animation-duration: 2.01037s;"></div><div class="star" style="top: 12.3491%; left: 47.2241%; animation-duration: 2.20536s;"></div><div class="star" style="top: 72.2924%; left: 60.7594%; animation-duration: 2.42509s;"></div><div class="star" style="top: 66.626%; left: 41.8921%; animation-duration: 3.10259s;"></div><div class="star" style="top: 52.415%; left: 66.0479%; animation-duration: 2.49194s;"></div><div class="star" style="top: 12.0481%; left: 88.0748%; animation-duration: 3.62557s;"></div><div class="star" style="top: 21.8364%; left: 46.138%; animation-duration: 3.09523s;"></div><div class="star" style="top: 41.7308%; left: 32.0125%; animation-duration: 2.18391s;"></div><div class="star" style="top: 97.3147%; left: 21.4363%; animation-duration: 4.56169s;"></div>
+
+<div class="emoji-caer" style="left: 43.6905px; animation-duration: 9.08588s; animation-delay: -6.3749s;">🏵️</div><div class="emoji-caer" style="left: 664.086px; animation-duration: 11.3795s; animation-delay: -4.85161s;">🌼</div><div class="emoji-caer" style="left: 343.476px; animation-duration: 10.6925s; animation-delay: -1.13976s;">🏵️</div><div class="emoji-caer" style="left: 105.947px; animation-duration: 10.8065s; animation-delay: -5.20182s;">🏵️</div><div class="emoji-caer" style="left: 1265.47px; animation-duration: 12.0035s; animation-delay: -7.43141s;">☀️</div><div class="emoji-caer" style="left: 572.655px; animation-duration: 11.4753s; animation-delay: -2.69411s;">🏵️</div><div class="emoji-caer" style="left: 577.466px; animation-duration: 8.23408s; animation-delay: -2.43859s;">☀️</div><div class="emoji-caer" style="left: 673.105px; animation-duration: 8.74398s; animation-delay: -0.973293s;">🌻</div><div class="emoji-caer" style="left: 923.573px; animation-duration: 11.8873s; animation-delay: -2.53229s;">🏵️</div><div class="emoji-caer" style="left: 105.682px; animation-duration: 11.2234s; animation-delay: -1.09661s;">🏵️</div><div class="emoji-caer" style="left: 138.968px; animation-duration: 13.6201s; animation-delay: -5.7768s;">🌻</div><div class="emoji-caer" style="left: 301.712px; animation-duration: 13.7297s; animation-delay: -3.745s;">🏵️</div><div class="emoji-caer" style="left: 66.8747px; animation-duration: 13.2059s; animation-delay: -2.90376s;">🌻</div><div class="emoji-caer" style="left: 630.284px; animation-duration: 10.7478s; animation-delay: -4.71028s;">☀️</div><div class="emoji-caer" style="left: 1208.28px; animation-duration: 9.76858s; animation-delay: -7.11919s;">🌻</div><div class="emoji-caer" style="left: 1109.47px; animation-duration: 12.0225s; animation-delay: -3.64942s;">☀️</div><div class="emoji-caer" style="left: 1258.8px; animation-duration: 10.6361s; animation-delay: -5.45743s;">🌻</div><div class="emoji-caer" style="left: 726.699px; animation-duration: 10.2405s; animation-delay: -4.58015s;">🌻</div><div class="emoji-caer" style="left: 733.63px; animation-duration: 10.7162s; animation-delay: -1.03025s;">🌼</div><div class="emoji-caer" style="left: 257.577px; animation-duration: 8.96636s; animation-delay: -5.69645s;">🌼</div><div class="emoji-caer" style="left: 1145.78px; animation-duration: 11.7245s; animation-delay: -4.86873s;">☀️</div><div class="emoji-caer" style="left: 1167.77px; animation-duration: 11.8643s; animation-delay: -2.5996s;">🏵️</div><div class="emoji-caer" style="left: 113.307px; animation-duration: 8.25003s; animation-delay: -7.79535s;">🌼</div><div class="emoji-caer" style="left: 451.348px; animation-duration: 12.7594s; animation-delay: -3.10522s;">🏵️</div><div class="emoji-caer" style="left: 279.69px; animation-duration: 11.1738s; animation-delay: -4.79856s;">🌼</div><div class="emoji-caer" style="left: 675.118px; animation-duration: 10.3781s; animation-delay: -5.12678s;">🏵️</div><div class="emoji-caer" style="left: 192.745px; animation-duration: 12.5783s; animation-delay: -2.69196s;">🌼</div><div class="emoji-caer" style="left: 485.444px; animation-duration: 13.7923s; animation-delay: -1.19479s;">🌼</div><div class="emoji-caer" style="left: 1049.59px; animation-duration: 9.70547s; animation-delay: -6.28852s;">🌼</div><div class="emoji-caer" style="left: 225.859px; animation-duration: 13.0362s; animation-delay: -0.608097s;">🌼</div><div class="emoji-caer" style="left: 111.645px; animation-duration: 10.3474s; animation-delay: -2.54566s;">☀️</div><div class="emoji-caer" style="left: 283.492px; animation-duration: 13.498s; animation-delay: -1.23281s;">🌼</div><div class="emoji-caer" style="left: 574.423px; animation-duration: 10.6516s; animation-delay: -4.90136s;">🏵️</div><div class="emoji-caer" style="left: 1234.63px; animation-duration: 10.6727s; animation-delay: -3.03329s;">🏵️</div><div class="emoji-caer" style="left: 955.455px; animation-duration: 13.3109s; animation-delay: -1.93098s;">☀️</div></body></html>
